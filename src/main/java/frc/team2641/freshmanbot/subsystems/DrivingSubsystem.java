@@ -26,12 +26,12 @@ public class DrivingSubsystem extends SubsystemBase {
     rightMotor1.clearStickyFaults();
     rightMotor2.clearStickyFaults();
 
-    configBrakes(Constants.MotorSpeeds.brakes);
+    configBrakes(true);
     configRamps(Constants.MotorSpeeds.driveRampSpeed);
   }
 
   public void aDrive(double rotation, double speed) {
-    differentialDrive.arcadeDrive(rotation, speed, true);
+    differentialDrive.arcadeDrive(rotation, -speed * 1, true);
   }
 
   public void tDrive(double left, double right) {

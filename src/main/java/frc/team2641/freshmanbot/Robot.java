@@ -36,6 +36,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     robotContainer.drivingSubsystem.configRamps(0);
+    robotContainer.drivingSubsystem.configBrakes(true);
 
     CommandScheduler.getInstance().registerSubsystem(robotContainer.drivingSubsystem);
     if (autoCommand != null)

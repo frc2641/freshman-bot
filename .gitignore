@@ -158,4 +158,5 @@ gradle-app.setting
 .settings/
 bin/
 
-*.wpilog
+# Simulation GUI and other tools window save file
+*-window.json
