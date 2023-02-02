@@ -50,11 +50,6 @@ public final class Constants {
     public static final int rightMotor1 = 1;
     public static final int rightMotor2 = 2;
     public static final int shoulderMotor = 6;
-    public static final int shooterMotor = 7;
-    public static final int intakeMotor = 12;
-    public static final int hopperMotor1 = 13;
-    public static final int hopperMotor2 = 14;
-    public static final int indexerMotor = 15;
   }
 
   // Encoders
