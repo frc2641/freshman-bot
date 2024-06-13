@@ -4,28 +4,26 @@
 
 package frc.team2641.freshmanbot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.team2641.freshmanbot.subsystems.ClawSubsystem;
+import edu.wpi.first.networktables.BooleanPublisher;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj2.command.Command;
 
-public class ClawCommand extends CommandBase {
+public class Shift extends Command {
+  BooleanPublisher shiftPub;
 
-  private boolean direction;
-  private ClawSubsystem clawSubsystem;
+  /** Creates a new Shift. */
+  public Shift() {
+    NetworkTable table = NetworkTableInstance.getDefault().getTable("state");
 
-  public ClawCommand(ClawSubsystem clawSubsystem, boolean direction) {
-    this.direction = direction;
-    this.clawSubsystem = clawSubsystem;
-    addRequirements(clawSubsystem);
+    shiftPub = table.getBooleanTopic("shift").publish();
+    shiftPub.set(false);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if (direction) {
-      clawSubsystem.release();
-    } else {
-      clawSubsystem.clamp();
-    }
+    shiftPub.set(true);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -36,6 +34,7 @@ public class ClawCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    shiftPub.set(false);
   }
 
   // Returns true when the command should end.

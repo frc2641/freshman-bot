@@ -7,24 +7,31 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team2641.freshmanbot.Constants;
 
-public class DrivingSubsystem extends SubsystemBase {
+public class Drivetrain extends SubsystemBase {
+  private static Drivetrain instance = null;
+
+  public static Drivetrain getInstance() {
+    if (instance == null)
+      instance = new Drivetrain();
+    return instance;
+  }
+
   public WPI_TalonSRX leftMotor1 = new WPI_TalonSRX(Constants.Motors.leftMotor1);
   public WPI_TalonSRX leftMotor2 = new WPI_TalonSRX(Constants.Motors.leftMotor2);
-
-  public MotorControllerGroup leftGroup = new MotorControllerGroup(leftMotor1, leftMotor2);
 
   public WPI_TalonSRX rightMotor1 = new WPI_TalonSRX(Constants.Motors.rightMotor1);
   public WPI_TalonSRX rightMotor2 = new WPI_TalonSRX(Constants.Motors.rightMotor2);
 
-  public MotorControllerGroup rightGroup = new MotorControllerGroup(rightMotor1, rightMotor2);
+  public DifferentialDrive differentialDrive = new DifferentialDrive(leftMotor1, rightMotor1);
 
-  public DifferentialDrive differentialDrive = new DifferentialDrive(leftGroup, rightGroup);
-
-  public DrivingSubsystem() {
+  public Drivetrain() {
     leftMotor1.clearStickyFaults();
     leftMotor2.clearStickyFaults();
     rightMotor1.clearStickyFaults();
     rightMotor2.clearStickyFaults();
+
+    leftMotor2.follow(leftMotor1);
+    rightMotor2.follow(rightMotor1);
 
     configBrakes(true);
     configRamps(Constants.MotorSpeeds.driveRampSpeed);

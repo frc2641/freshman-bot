@@ -16,12 +16,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    if (robotContainer.driver.getRawButton(Constants.GamepadButtons.leftBumper)) {
-      robotContainer.driverShift = true;
-    } else {
-      robotContainer.driverShift = false;
-    }
-
     CommandScheduler.getInstance().run();
   }
 
@@ -35,10 +29,10 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    robotContainer.drivingSubsystem.configRamps(0);
-    robotContainer.drivingSubsystem.configBrakes(true);
+    robotContainer.drivetrain.configRamps(0);
+    robotContainer.drivetrain.configBrakes(true);
 
-    CommandScheduler.getInstance().registerSubsystem(robotContainer.drivingSubsystem);
+    CommandScheduler.getInstance().registerSubsystem(robotContainer.drivetrain);
     if (autoCommand != null)
       autoCommand.schedule();
   }
@@ -50,7 +44,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    robotContainer.drivingSubsystem.configRamps(Constants.MotorSpeeds.driveRampSpeed);
+    robotContainer.drivetrain.configRamps(Constants.MotorSpeeds.driveRampSpeed);
 
     if (autoCommand != null)
       autoCommand.cancel();
