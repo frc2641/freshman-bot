@@ -22,7 +22,7 @@ public class Shift extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
+  public void initialize() {             
     shiftPub.set(true);
   }
 
