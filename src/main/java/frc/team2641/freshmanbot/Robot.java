@@ -1,17 +1,23 @@
 package frc.team2641.freshmanbot;
 
+import edu.wpi.first.wpilibj.PneumaticHub;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.team2641.freshmanbot.subsystems.Pneumatics;
 
 public class Robot extends TimedRobot {
   Command autoCommand;
-
+  private static Pneumatics pneumatics;
+  private static PneumaticHub ph;
   public static RobotContainer robotContainer;
 
   @Override
   public void robotInit() {
     robotContainer = new RobotContainer();
+    pneumatics = Pneumatics.getInstance();
+        ph = new PneumaticHub();
+
   }
 
   @Override
@@ -70,4 +76,9 @@ public class Robot extends TimedRobot {
   @Override
   public void simulationPeriodic() {
   }
+
+  public static PneumaticHub getPH() {
+    return ph;
+  }
+
 }

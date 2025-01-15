@@ -19,7 +19,7 @@ public class Climber extends SubsystemBase {
   private DoubleSolenoid climber = Robot.getPH().makeDoubleSolenoid(7, 6);
 
   private Climber() {
-    lower();
+    close();
   }
 
   public void depressurize() {
