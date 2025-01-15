@@ -30,5 +30,6 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     driverGamepad.leftBumper().whileTrue(new Shift());
+    driverGamepad.xbutton().onTrue(new Climb());
   }
 }
